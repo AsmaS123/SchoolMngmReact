@@ -1,7 +1,7 @@
 import { useErrorBoundary } from "react-error-boundary";
 
 const ErrorComponent = ({ error}:any) =>{
-    debugger;
+    // debugger;
     // console.log(error,'error')
     return(<>
         <h1 style={{ color: "red" }}>something went wrong!</h1>

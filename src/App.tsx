@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Link, Route } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
-import  { Login,Register,Dashboard,Teacher ,AddUpdateTeacher,Layout,Classroom ,Subject,Timetable ,TeacherTimetable} from './components/index';
-
+import  { Attendance, AddUpdateAttendance,Student,Login,Register,Dashboard,Teacher ,AddUpdateTeacher,Layout,Classroom ,Subject,Timetable ,TeacherTimetable} from './components/index';
+ 
 // import ErrorBoundary from './components/errorboundry';
 
 // export const  AuthCreateContext = React.createContext(localStorage.getItem("token"));
@@ -41,7 +41,10 @@ function App() {
         <Route path="/timetable" element={<Timetable />} />      
         <Route path="/teachertimetable" element={<TeacherTimetable />} />  
         <Route path="/teacher/:id?" element={<AddUpdateTeacher/>} />
+        <Route path="/attendance" element={<Attendance/>} /> 
+        <Route path="/attendance/:id?" element={<AddUpdateAttendance/>} />  
         <Route path="/layout" element={<Layout />} />
+        <Route path="/student" element={<Student />} />
         {/* <Route path="/errorboundry" element={<ErrorBoundary />} /> */}
       </Routes>
     </Router>

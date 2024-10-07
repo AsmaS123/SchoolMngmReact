@@ -1,6 +1,6 @@
 import { legacy_createStore as createStore } from 'redux';
 import { Provider } from 'react-redux';
-import {rootReducer,timetablereducer }from './reducer'; // Import your root reducer
+import {rootReducer,timetablereducer,attendanceReducer }from './reducer'; // Import your root reducer
 import loggerMiddleware from './loggerMiddleware';
 import {  applyMiddleware } from 'redux';
 import { thunk } from 'redux-thunk';
@@ -10,6 +10,7 @@ import { combineReducers } from 'redux';
 const rootReducers = combineReducers({
   rootReducer: rootReducer,
   timetablereducer: timetablereducer,
+  attendanceReducer: attendanceReducer
 });
 
 // Create Redux store with middleware applied

@@ -51,6 +51,20 @@ export const mainListItems = (
       <Link to="/timetable">Timetable</Link>
       {/* <ListItemText primary="Integrations" /> */}
     </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon>
+        <LayersIcon />
+      </ListItemIcon>
+      <Link to="/student">Student</Link>
+      {/* <ListItemText primary="Integrations" /> */}
+    </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon>
+        <LayersIcon />
+      </ListItemIcon>
+      <Link to="/attendance">Attendance</Link>
+      {/* <ListItemText primary="Integrations" /> */}
+    </ListItemButton>
   </React.Fragment>
 );
 

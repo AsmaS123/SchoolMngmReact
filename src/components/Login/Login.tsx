@@ -22,7 +22,7 @@ export default function Login() {
   };
 
   async function login(obj:any) {
-    debugger
+    // debugger
     const data = obj;
     try {
       const response : any= await axiosInstance.post('login',data);

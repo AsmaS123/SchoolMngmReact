@@ -8,5 +8,8 @@ import Classroom from './Classroom/Classroom';
 import Subject from './Subject/Subject';
 import Timetable from './Timetable/Timetable';
 import TeacherTimetable from './TeacherTimetable/TeacherTimetable';
+import Student from './Student/Student';
+import AddUpdateAttendance from './AddUpdateAttendance/AddUpdateAttendance';
+import Attendance from './Attendance/Attendance';
 
-export  { Login,Register,Dashboard,Teacher ,AddUpdateTeacher,Layout,Classroom ,Subject ,Timetable,TeacherTimetable};
+export  { Attendance,Student,Login,Register,Dashboard,Teacher ,AddUpdateTeacher,Layout,Classroom ,Subject ,Timetable,TeacherTimetable,AddUpdateAttendance};

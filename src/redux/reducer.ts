@@ -47,5 +47,19 @@ const initialState = {
         return state;
     }
   }
+
+  export const attendanceReducer = (state={}, action: { type: any; payload:any }) => {
+    // debugger
+    switch (action.type) {
+      case 'attendance':
+        // debugger
+        return {
+          ...state,
+          ...action.payload
+        };
+        default:
+        return state;
+    }
+  }
   
   // export default rootReducer;

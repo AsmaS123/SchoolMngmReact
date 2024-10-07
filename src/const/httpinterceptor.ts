@@ -25,7 +25,7 @@ axiosInstance.interceptors.response.use(
 
 axiosInstance.interceptors.request.use(
   async (config) => {
-    debugger
+    // debugger
     // Retrieve JWT token from local storage
     const temp :any= localStorage.getItem('loginData');
     const loginData = JSON.parse(temp);

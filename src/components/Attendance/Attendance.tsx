@@ -1,9 +1,12 @@
+import React, { FC } from 'react';
+import styles from './Attendance.module.css';
 import { useState, useEffect } from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import { CheckBox } from '@mui/icons-material';
 import Paper from '@mui/material/Paper';
 import Table from "@mui/material/Table"; 
 import TableBody from "@mui/material/TableBody"; 
@@ -18,18 +21,21 @@ import Layout from '../Layout/Layout';
 import Button from '@mui/material/Button';
 import { green } from '@mui/material/colors';
 import { useNavigate } from "react-router-dom";
-import { useSelector} from 'react-redux';
+import { useSelector,useDispatch} from 'react-redux';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import AddUpdateTeacher from './AddUpdateTeacher';
+// import AddUpdateTeacher from './AddUpdateTeacher';
 import axiosInstance from '../../const/httpinterceptor';
 import { ToastContainer, toast } from "react-toastify";
+import AddUpdateAttendance from '../AddUpdateAttendance/AddUpdateAttendance';
+
 import '../../../node_modules/react-toastify/dist/ReactToastify.css';
 
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function Teacher() {
+// interface AttendanceProps {}
+
+const Attendance = () => {
   const navigate = useNavigate();
   // debugger
   // const[ token, setToken] = useState('');
@@ -42,6 +48,10 @@ export default function Teacher() {
   const [item,setItem] = useState({});
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState(null);
+  const [flag,setFlag] = useState(false)
+  const dispatch = useDispatch();
+
+
     // const [data, setData] = React.useState<any>([])
   // const [loading, setLoading] = React.useState(false);
   
@@ -66,26 +76,29 @@ export default function Teacher() {
   }
   );
 
-  const handleChange = (val?:any)=>{
+  const handleEdit = (val?:any)=>{
+    debugger
       setVisible(true)
       if(val){
-        
+        dispatch({type: 'attendance',payload:val});
+        navigate("/attendance/"+val._id)
           setItem(val)
+          setFlag(true)
       }
-      console.log("Add or update here")
+      // console.log("Add or update here")
   }
 
     async function fetchData() {
       try {
-        debugger
-        const response = await axiosInstance.get('teachers');
-        setData(response.data.teachers.reverse());
+        // debugger
+        const response = await axiosInstance.get('attendance');
+        setData(response.data.attendance.reverse());
         // toast("This is a toast notification !");
         // toast.success("Success Notification !", {
         //   position: 'top-right',
         // })
       } catch (error:any) {
-        debugger
+        // debugger
         setError(error.message);
         toast.error(error.message, {
           position: 'top-right',
@@ -93,12 +106,35 @@ export default function Teacher() {
       }
     }
 
-const handleTeacher = (event:any)=>{
-  debugger
+const addAttendance = (event:any)=>{
+  navigate("/attendance/null");
+  dispatch({type: 'attendance',payload:{}});
+  // debugger
   // toast("This is a toast notification !");
   // toast.success("Success Notification !", {
   //   position: 'top-right',
   // })
+}
+
+const handleDelete = async(_id:any) =>{
+    alert(_id);
+    try {
+      // debugger
+      const response = await axiosInstance.delete('attendance/'+_id);
+      alert('deleted successfuly');
+      fetchData();
+      // setData(response.data.attendance.reverse());
+      // toast("This is a toast notification !");
+      // toast.success("Success Notification !", {
+      //   position: 'top-right',
+      // })
+    } catch (error:any) {
+      // debugger
+      setError(error.message);
+      toast.error(error.message, {
+        position: 'top-right',
+      })
+    }
 }
   useEffect(()=>{
       // debugger;
@@ -108,12 +144,10 @@ const handleTeacher = (event:any)=>{
   // if (error) return <div>Error: {error}</div>;
   if (!data) return <div>Loading...</div>;
   
-  return (
-    <>
-    {/* { loading && !token && <Navigate to="/" replace />} */}
-    {/* { loading && token && */}
 
-    <ThemeProvider theme={defaultTheme}>
+  return (
+ <>
+  <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <Layout />
         
@@ -147,8 +181,7 @@ const handleTeacher = (event:any)=>{
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <h2>Teacher</h2>
-                 
+                  <h2>Attendance</h2>
                   <>
                 <TableContainer component={Paper}> 
                 <TextField
@@ -166,41 +199,30 @@ const handleTeacher = (event:any)=>{
                 <Button 
                     variant="contained"
                     sx={{ mt: 1, mb: 1, width:2 ,float:'right', }}
-                    onClick={handleTeacher}
-                  >
-                    Add Teacher
-                  </Button>
-                  <Button 
-                    variant="contained"
-                    sx={{ mt: 1, mb: 1, width:2 ,float:'right', }}
-                    onClick={()=>navigate("/attendance/null")}
+                    onClick={addAttendance}
                   >
                     Add Attendance
                   </Button>
-                  
-                 <Button 
+                
+                 {/* <Button 
                     variant="contained"
                     sx={{ mt: 1, mb: 1, width:2 ,float:'right',marginRight:'10px'}}
-                    onClick={()=> navigate("/teachertimetable")}
+                    onClick={()=> navigate("/attendance/3423")}
                   >
-                    View Timetable
-                  </Button>
+                    Attendance Add/Update
+                  </Button> */}
                   {/* <input type='searh' /> */}
                 <Table sx={{ minWidth: 650 }}  
                     aria-label="simple table"> 
                     <TableHead> 
                         <TableRow> 
                             <TableCell>S.No</TableCell> 
-                            <TableCell align="right">Teacher ID 
+                            <TableCell align="right">User ID 
                             </TableCell> 
-                            <TableCell align="right">Email 
+                            <TableCell align="right">Date 
                             </TableCell> 
-                            <TableCell align="right">Name 
+                            <TableCell align="right">Status 
                             </TableCell> 
-                            <TableCell align="right">DOB 
-                            </TableCell> 
-                            <TableCell align="right">Gender 
-                            </TableCell>
                         </TableRow> 
                     </TableHead> 
                     <TableBody> 
@@ -208,24 +230,21 @@ const handleTeacher = (event:any)=>{
                         // {data && data.map((row:any)=>{
                              return    (
                             <TableRow 
-                                key={row.teacher_id} 
+                                key={row.user_id} 
                                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }} 
                             >
                                 <TableCell component="th" scope="row"> 
                                     {i+(rpg*pg)+1} 
                                 </TableCell>  
                                 <TableCell component="th" scope="row"> 
-                                    {row.teacher_id} 
+                                    {row.user_id} 
                                 </TableCell> 
-                                <TableCell align="right">{row.email} 
+                                <TableCell align="right">{row.date} 
                                 </TableCell> 
-                                <TableCell align="right">{row.name} 
+                                <TableCell align="right">{row.status ? 'Present' : 'Absent'} 
+                                {/* <input type='checkbox' checked={row.status} /> */}
                                 </TableCell> 
-                                <TableCell align="right">{row.dob} 
-                                </TableCell> 
-                                <TableCell align="right">{row.gender} 
-                                </TableCell> 
-                                <TableCell align="right"><button onClick={()=>handleChange(row)}>Edit</button><button>Delete</button>
+                                <TableCell align="right"><button onClick={()=>handleEdit(row)}>Edit</button><button onClick={()=>handleDelete(row._id)}>Delete</button>
                                 </TableCell> 
                             </TableRow> 
                              )
@@ -243,25 +262,17 @@ const handleTeacher = (event:any)=>{
                 onRowsPerPageChange={handleChangeRowsPerPage} 
             /> 
             </>
-            
+                        {/* <AddUpdateAttendance data={item} flag={flag}/> */}
              </Paper>
               </Grid>
-           
+                        
             </Grid>
           </Container> 
-          <AddUpdateTeacher data={item}/>      
+          {/* <AddUpdateTeacher data={item}/>       */}
         </Box>
       </Box>
     </ThemeProvider>
     </>
-  );
-}
+)};
 
-
-
-    // debugger
-    // const url = apiurl+'teachers';
-    // axios.get(url).then((res)=>{
-    //     setData(res.data.teachers.reverse())
-    //     setLoading(true)
-    // })
+export default Attendance;
