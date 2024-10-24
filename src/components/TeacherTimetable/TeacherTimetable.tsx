@@ -124,8 +124,8 @@ export default function TeacherTimetable() {
     const url = apiurl+'teachers/timetableList';
     try{
      const result :any=  await axiosInstance.get(url);
-     setData(result.data.result.reverse());
-     listFunc(result.data.result)
+     setData(result.data.lookupresult.reverse());
+     listFunc(result.data.lookupresult)
     }
     catch(error:any){
       console.log(error)
