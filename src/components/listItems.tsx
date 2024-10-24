@@ -65,21 +65,43 @@ export const mainListItems = (
       <Link to="/attendance">Attendance</Link>
       {/* <ListItemText primary="Integrations" /> */}
     </ListItemButton>
+
   </React.Fragment>
 );
 
 
-  const secondaryListItem = () => {    
+  const secondaryListItem = () => {  
+    // const [ user ,setUser] :any= React.useState([])
+    // const [admin, setAdmin] = 
     const handleLogout = ()=>{
       debugger
       localStorage.removeItem('loginData');
       window.location.href = '/';
     }
 
+    const loginData :any= localStorage.getItem('loginData')
+    const temp = JSON.parse(loginData)
+
+    // React.useEffect(()=>{
+    //   debugger
+    //   const loginData :any= localStorage.getItem('loginData')
+    //   const temp = JSON.parse(loginData)
+    //   setUser(temp.roles)
+    // },[]);
+
+
   return(<>
     <ListSubheader component="div" inset>
       Saved reports
     </ListSubheader>
+    { temp.roles && temp.roles.includes('admin') &&
+      <ListItemButton >
+      <ListItemIcon >
+        <AssignmentIcon />
+      </ListItemIcon>
+      <a  onClick={()=>{ window.location.href = '/roles'}}>Roles</a>
+      </ListItemButton>
+    }
     <ListItemButton>
       <ListItemIcon>
         <AssignmentIcon />

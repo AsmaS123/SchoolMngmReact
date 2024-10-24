@@ -26,7 +26,7 @@ export default function Login() {
     const data = obj;
     try {
       const response : any= await axiosInstance.post('login',data);
-      const obj = {"token": response.data.token,"permission":response.data.permission};
+      const obj = {"token": response.data.token,"roles":response.data.roles};
       localStorage.setItem("loginData", JSON.stringify(obj));
       navigate("/dashboard");
     } catch (error:any) {

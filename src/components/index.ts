@@ -11,5 +11,5 @@ import TeacherTimetable from './TeacherTimetable/TeacherTimetable';
 import Student from './Student/Student';
 import AddUpdateAttendance from './AddUpdateAttendance/AddUpdateAttendance';
 import Attendance from './Attendance/Attendance';
-
-export  { Attendance,Student,Login,Register,Dashboard,Teacher ,AddUpdateTeacher,Layout,Classroom ,Subject ,Timetable,TeacherTimetable,AddUpdateAttendance};
+import Roles from './roles/roles';
+export  {Roles,  Attendance,Student,Login,Register,Dashboard,Teacher ,AddUpdateTeacher,Layout,Classroom ,Subject ,Timetable,TeacherTimetable,AddUpdateAttendance};
