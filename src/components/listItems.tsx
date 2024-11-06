@@ -70,7 +70,7 @@ export const mainListItems = (
 );
 
 
-  const secondaryListItem = () => {  
+   const secondaryListItem = () => {  
     // const [ user ,setUser] :any= React.useState([])
     // const [admin, setAdmin] = 
     const handleLogout = ()=>{
@@ -78,10 +78,10 @@ export const mainListItems = (
       localStorage.removeItem('loginData');
       window.location.href = '/';
     }
-
-    const loginData :any= localStorage.getItem('loginData')
+    debugger;
+    const loginData :any=  localStorage.getItem('loginData')
     const temp = JSON.parse(loginData)
-
+    // console.log(temp.roles,'roles')
     // React.useEffect(()=>{
     //   debugger
     //   const loginData :any= localStorage.getItem('loginData')
@@ -94,7 +94,7 @@ export const mainListItems = (
     <ListSubheader component="div" inset>
       Saved reports
     </ListSubheader>
-    { temp.roles && temp.roles.includes('admin') &&
+    { temp && temp.roles.includes('admin') &&
       <ListItemButton >
       <ListItemIcon >
         <AssignmentIcon />

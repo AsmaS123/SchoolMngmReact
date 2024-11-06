@@ -37,6 +37,7 @@ export default function Register() {
       name: data.get('name'),
       email: data.get('email'),
       password: data.get('password'),
+      roles:['users']
     };
     const url = apiurl+'signUp';
     axios.post(url,obj).then((res: any)=>{
